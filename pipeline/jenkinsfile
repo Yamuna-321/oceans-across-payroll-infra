@@ -1,12 +1,7 @@
 pipeline {
     agent any
 
-    environment {
-        AWS_REGION = 'eu-west-2'
-    }
-
     stages {
-
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/yourusername/oceans-across-payroll-infra.git'
@@ -21,7 +16,7 @@ pipeline {
             }
         }
 
-        stage('Terraform Validate') {
+        stage('Validate') {
             steps {
                 dir('terraform') {
                     sh 'terraform fmt -check'
@@ -30,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Terraform Plan') {
+        stage('Plan') {
             steps {
                 dir('terraform') {
                     sh 'terraform plan'
@@ -40,30 +35,14 @@ pipeline {
 
         stage('Security Scan') {
             steps {
-                echo 'Run tfsec / checkov security scanning here'
-            }
-        }
-
-        stage('Build Docker Images') {
-            steps {
-                echo 'Build tenant Docker images'
+                echo 'Run tfsec or checkov here'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Terraform apply or deployment approval stage'
+                echo 'Deployment stage'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully.'
-        }
-
-        failure {
-            echo 'Pipeline failed. Review logs.'
         }
     }
 }
