@@ -305,3 +305,29 @@ This project prioritizes:
 * Professional DevOps practices
 
 The implementation is intended as a deployment-ready infrastructure blueprint for the Oceans Across payroll platform.
+---
+
+## Task 2 — Multi-Tenancy Architecture
+
+### Documentation
+- docs/task2_multi_tenancy.md
+- docs/architecture-diagram.md
+
+### Covers:
+- Database-per-tenant isolation strategy
+- Tenant login context via JWT
+- Secure request lifecycle propagation
+- Query/API cross-tenant prevention
+- IAM role separation
+- S3 prefix access boundaries
+- Tenant onboarding
+- Tenant offboarding
+- Compliance and audit controls
+
+### Security Model
+Task 2 extends Task 1 by enforcing defense-in-depth through:
+
+- Application-layer tenant validation
+- Infrastructure-layer IAM restrictions
+- Storage-layer S3 segregation
+- Dedicated tenant resource isolation
