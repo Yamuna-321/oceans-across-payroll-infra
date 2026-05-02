@@ -151,3 +151,11 @@ Provide operational procedures for responding to infrastructure, security, and t
 - Rotate GitHub Secrets
 - Revoke SSH keys
 - Audit deployments
+## Public RDS Exposure Response
+- Disable public accessibility
+- Lock SGs
+- Audit CloudTrail
+- Rotate credentials
+- Review tenant risk
+- Restore compliant configuration
+
