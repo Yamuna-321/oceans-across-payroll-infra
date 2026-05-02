@@ -467,3 +467,117 @@ Documentation:
 - SNS alerts
 - Public DB incident runbook
 - Monitoring retention policies
+---
+
+## Task 6 — UK Compliance Considerations
+
+### 1. AWS-Native Controls for UK GDPR Compliance
+
+To protect employee PII, payroll records, and banking information, the platform implements the following AWS-native controls:
+
+#### Identity & Access Security
+- IAM least privilege policies
+- Tenant-specific IAM roles
+- MFA for privileged users
+- AWS Organizations SCPs
+- AWS CloudTrail auditing
+
+#### Data Protection
+- S3 server-side encryption (SSE-KMS)
+- RDS encryption at rest
+- TLS/SSL for all services
+- Secrets Manager / SSM Parameter Store
+- KMS-managed encryption keys
+
+#### Monitoring & Governance
+- AWS Config compliance rules
+- GuardDuty threat detection
+- Security Hub
+- CloudWatch alarms
+- SNS critical alerts
+
+#### Backup & Recovery
+- Versioned S3
+- Automated RDS backups
+- Audit log retention
+- Immutable logs
+
+#### Compliance Benefits
+- GDPR Article 32 security controls
+- Auditability
+- Data minimization
+- Breach detection
+- Secure operational governance
+
+---
+
+### 2. Ensuring UK/EU Data Residency
+
+To maintain UK/EU data sovereignty:
+
+- Deploy all infrastructure in:
+  - eu-west-2 (London)
+  - eu-west-1 (Ireland) if needed for DR
+- Restrict backups to UK/EU regions
+- Disable cross-region replication outside UK/EU
+- Enforce region restrictions via SCPs
+- Store logs and snapshots only in compliant regions
+- Use AWS Config to validate regional compliance
+
+#### Result:
+Employee payroll and banking data remains fully within UK/EU legal jurisdiction.
+
+---
+
+### 3. Right to Erasure (Permanent Data Deletion)
+
+To satisfy GDPR Article 17:
+
+#### Deletion Workflow
+1. Validate identity and deletion request
+2. Identify all tenant-linked resources:
+   - RDS records
+   - S3 documents
+   - Logs
+   - Backups
+   - Monitoring records
+3. Delete production records
+4. Remove S3 objects and versions
+5. Revoke IAM credentials
+6. Delete secrets
+7. Purge backups per policy
+8. Record deletion audit trail
+
+---
+
+#### AWS Services Involved
+- RDS deletion scripts
+- S3 lifecycle + object purge
+- Secrets Manager deletion
+- CloudWatch log retention enforcement
+- Backup policy enforcement
+
+---
+
+#### Compliance Safeguards
+- Deletion verification
+- Audit logging
+- Legal hold exception handling
+- Secure offboarding
+- Cross-service deletion consistency
+
+---
+
+### Final Compliance Summary
+
+This platform aligns with UK GDPR through:
+
+- Encryption
+- Least privilege
+- UK/EU residency
+- Monitoring
+- Right-to-erasure workflows
+- Auditability
+- Secure tenant isolation
+
+The design emphasizes enterprise-grade payroll security and regulatory readiness.
