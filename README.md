@@ -442,3 +442,16 @@ Documentation:
 - NACLs
 - Cross-tenant network isolation
 - Defense-in-depth security architecture
+## Task 4 — CI/CD Pipeline
+
+Documentation:
+- .github/workflows/deploy.yml
+- docs/task4_cicd_pipeline.md
+
+### Features:
+- GitHub Actions
+- Docker build/test
+- EC2 deployment
+- Environment segregation
+- Secure secret handling
+- Multi-team deployment
