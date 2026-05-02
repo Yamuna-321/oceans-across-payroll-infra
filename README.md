@@ -331,3 +331,77 @@ Task 2 extends Task 1 by enforcing defense-in-depth through:
 - Infrastructure-layer IAM restrictions
 - Storage-layer S3 segregation
 - Dedicated tenant resource isolation
+### Infrastructure Access Boundaries (Task 2b)
+
+- Separate IAM roles for:
+  - Companies
+  - Bureaus
+  - Employees
+- Tenant-scoped EC2 access
+- Tenant-specific S3 prefixes
+- Bucket policy restrictions
+- Defense-in-depth beyond application logic
+- Security Groups and infrastructure segmentation
+
+### Tenant Storage Segregation
+
+Example:
+```bash
+s3://oceans-payroll-docs/company_123/
+s3://oceans-payroll-docs/bureau_456/
+s3://oceans-payroll-docs/employee_789/
+
+
+
+
+### Tenant Onboarding & Offboarding (Task 2c)
+
+#### Tenant Onboarding
+
+When a new Company or Bureau is onboarded, the platform provisions:
+
+- Unique tenant_id
+- Dedicated PostgreSQL database
+- Tenant-specific IAM role
+- S3 storage prefix or bucket
+- Security groups
+- Access credentials
+- Monitoring configuration
+- Backup policy
+- Audit logging
+
+#### Provisioning Workflow
+1. Tenant registration approved
+2. Terraform provisions isolated infrastructure
+3. IAM boundaries applied
+4. Dedicated storage and database created
+5. Monitoring and backups enabled
+6. Credentials securely issued
+
+#### Day-One Isolation
+- Separate IAM
+- Separate data storage
+- Separate security controls
+- Separate backups
+- Full audit trail
+
+---
+
+#### Tenant Offboarding
+
+When a tenant is removed:
+
+- IAM access revoked
+- Credentials disabled
+- Active sessions terminated
+- Data exported if required
+- Databases securely deleted
+- S3 documents removed
+- Audit logs archived
+- Compliance retention enforced
+
+#### Compliance Controls
+- GDPR-aligned deletion
+- Payroll retention policy
+- Immutable audit records
+- Legal hold support
