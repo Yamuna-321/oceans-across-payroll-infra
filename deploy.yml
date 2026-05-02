@@ -1,0 +1,67 @@
+name: Oceans Across CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        service:
+          - companies
+          - bureaus
+          - employees
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: |
+          docker build -f docker/${{ matrix.service }}.Dockerfile -t ${{ matrix.service }}-service .
+
+      - name: Run Placeholder Tests
+        run: |
+          echo "Running tests for ${{ matrix.service }}"
+          docker run --rm ${{ matrix.service }}-service
+
+  deploy-dev:
+    needs: build-test
+    runs-on: ubuntu-latest
+    environment: development
+
+    steps:
+      - name: Deploy to Dev EC2 via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_EC2_HOST }}
+          username: ${{ secrets.DEV_EC2_USER }}
+          key: ${{ secrets.DEV_EC2_KEY }}
+          script: |
+            cd /app/${{ github.repository }}
+            git pull origin main
+            docker-compose up -d --build
+
+  deploy-prod:
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+    environment: production
+
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Deploy to Production EC2 via SSH
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_EC2_HOST }}
+          username: ${{ secrets.PROD_EC2_USER }}
+          key: ${{ secrets.PROD_EC2_KEY }}
+          script: |
+            cd /app/${{ github.repository }}
+            git pull origin main
+            docker-compose up -d --build
