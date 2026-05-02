@@ -1,0 +1,74 @@
+graph TB
+    Users[UK Payroll Platform Users]
+    Companies[Companies Portal]
+    Bureaus[Bureaus Portal]
+    Employees[Employees Portal]
+
+    Users --> Companies
+    Users --> Bureaus
+    Users --> Employees
+
+    subgraph AWS[AWS Cloud - eu-west-2]
+        subgraph VPC[Payroll VPC 10.0.0.0/16]
+            IGW[Internet Gateway]
+            NAT[NAT Gateway]
+
+            subgraph PublicAZ1[Public Subnet AZ1]
+                ALB1[Public Access / Bastion / Routing]
+            end
+
+            subgraph PublicAZ2[Public Subnet AZ2]
+                ALB2[Public Access / HA Routing]
+            end
+
+            subgraph PrivateAZ1[Private Subnet AZ1]
+                EC2C[EC2 Companies Tenant]
+                EC2B[EC2 Bureaus Tenant]
+            end
+
+            subgraph PrivateAZ2[Private Subnet AZ2]
+                EC2E[EC2 Employees Tenant]
+                RDS[(PostgreSQL RDS)]
+            end
+
+            S3[S3 Payroll Docs Bucket\nVersioning + Encryption]
+
+            IAMC[IAM Company Role]
+            IAMB[IAM Bureau Role]
+            IAME[IAM Employee Role]
+
+            SG[Security Groups + NACL Isolation]
+        end
+    end
+
+    Companies --> IGW
+    Bureaus --> IGW
+    Employees --> IGW
+
+    IGW --> ALB1
+    IGW --> ALB2
+
+    ALB1 --> EC2C
+    ALB1 --> EC2B
+    ALB2 --> EC2E
+
+    EC2C --> RDS
+    EC2B --> RDS
+    EC2E --> RDS
+
+    EC2C --> S3
+    EC2B --> S3
+    EC2E --> S3
+    
+    IAMC --> EC2C
+    IAMB --> EC2B
+    IAME --> EC2E
+
+    SG --> EC2C
+    SG --> EC2B
+    SG --> EC2E
+    SG --> RDS
+
+    NAT --> PrivateAZ1
+    NAT --> PrivateAZ2
+
