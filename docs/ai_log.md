@@ -151,3 +151,23 @@ All AI-generated outputs were:
 - Security-hardened
 - Adjusted for assignment scope
 - Verified for enterprise readiness
+## Prompt 5
+Generate GitHub Actions CI/CD pipeline for:
+- Docker build/test
+- Multi-service deployment
+- EC2 deployment via SSH
+- Environment segregation
+- Secure secrets handling
+
+### AI Output
+Base GitHub Actions deployment pipeline.
+
+### Changes Made
+- Added service matrix strategy
+- Added dev/prod separation
+- Improved deployment safety
+- Added secure GitHub Secrets references
+- Expanded team independence
+
+### Reason
+To satisfy Task 4 CI/CD and deployment architecture requirements.

@@ -124,3 +124,30 @@ Provide operational procedures for responding to infrastructure, security, and t
 - Automated recovery
 - Secure auditability
 - Minimal blast radius
+
+
+
+# CI/CD Pipeline Failure Response
+
+## GitHub Actions Failure
+- Review Actions logs
+- Validate Docker build
+- Verify secrets
+- Check deployment host
+- Roll back deployment
+
+---
+
+## Deployment Failure
+- Validate SSH/SSM access
+- Check EC2 health
+- Rebuild Docker containers
+- Restore previous deployment
+- Audit failed release
+
+---
+
+## Secrets Exposure
+- Rotate GitHub Secrets
+- Revoke SSH keys
+- Audit deployments
