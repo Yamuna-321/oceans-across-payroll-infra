@@ -405,3 +405,22 @@ When a tenant is removed:
 - Payroll retention policy
 - Immutable audit records
 - Legal hold support
+### Infrastructure Access Boundaries (Task 2b)
+
+- Separate IAM roles for:
+  - Companies
+  - Bureaus
+  - Employees
+- Tenant-scoped EC2 access
+- Tenant-specific S3 prefixes
+- Bucket policy restrictions
+- Defense-in-depth beyond application logic
+- Security Groups and infrastructure segmentation
+
+### Tenant Storage Segregation
+
+Example:
+```bash
+s3://oceans-payroll-docs/company_123/
+s3://oceans-payroll-docs/bureau_456/
+s3://oceans-payroll-docs/employee_789/
