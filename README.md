@@ -424,3 +424,21 @@ Example:
 s3://oceans-payroll-docs/company_123/
 s3://oceans-payroll-docs/bureau_456/
 s3://oceans-payroll-docs/employee_789/
+## Task 3 — Security & Access Control
+
+Documentation:
+- docs/task3_security_access_control.md
+
+### Covers:
+- IAM least privilege
+- Role-based access control
+- Tenant-specific IAM boundaries
+- Secrets Manager / SSM
+- No hardcoded credentials
+- Encryption at rest
+- Encryption in transit
+- SSL/TLS
+- Security Groups
+- NACLs
+- Cross-tenant network isolation
+- Defense-in-depth security architecture
