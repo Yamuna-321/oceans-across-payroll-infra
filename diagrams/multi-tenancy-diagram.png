@@ -1,0 +1,13 @@
+User Login
+   ↓
+Identity Provider
+   ↓
+JWT (tenant_id + role)
+   ↓
+API Gateway
+   ↓
+Tenant Middleware
+   ↓
+IAM / RBAC Validation
+   ↓
+Tenant-Specific DB + S3 Access
