@@ -455,3 +455,15 @@ Documentation:
 - Environment segregation
 - Secure secret handling
 - Multi-team deployment
+## Task 5 — Monitoring & Incident Readiness
+
+Documentation:
+- terraform/monitoring.tf
+- docs/task5_monitoring_incident_readiness.md
+
+### Includes:
+- CloudWatch alarms
+- Log groups
+- SNS alerts
+- Public DB incident runbook
+- Monitoring retention policies
