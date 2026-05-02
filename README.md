@@ -1,4 +1,4 @@
-# oceans-across-payroll-infra
+
 # Oceans Across Payroll Infrastructure Platform
 
 ## Project Overview
